@@ -282,6 +282,13 @@ export interface AppleRequestOptions {
   nonceEnabled?: boolean;
 
   /**
+   * Whether to automatically hash the nonce value before sending to Apple.
+   *
+   * Defaults to true.
+   */
+  hashNonceAutomatically?: boolean;
+
+  /**
    * State to be passed to the identity provider.
    *
    * This value will be returned as a part of successful AppleRequestResponse response.
@@ -544,6 +551,14 @@ export interface AndroidConfig {
    * Defaults to true.
    */
   nonceEnabled?: boolean;
+
+  /**
+   * Whether to automatically hash the nonce value before sending to Apple.
+   *
+   * Defaults to true.
+   */
+  hashNonceAutomatically?: boolean;
+
 }
 
 export interface AndroidSigninResponse {

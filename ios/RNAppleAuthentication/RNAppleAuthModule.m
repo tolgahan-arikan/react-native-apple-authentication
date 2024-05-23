@@ -84,6 +84,7 @@ RCT_EXPORT_METHOD(getCredentialStateForUser:
 
 RCT_EXPORT_METHOD(performRequest:
   (ASAuthorizationAppleIDRequest *) appleIdRequest
+    :(BOOL *) hashNonceAutomatically
     :(RCTPromiseResolveBlock) resolve
     :(RCTPromiseRejectBlock) reject
 ) {
@@ -95,8 +96,10 @@ RCT_EXPORT_METHOD(performRequest:
 
   NSString *rawNonce = nil;
   if (appleIdRequest.nonce) {
-    rawNonce = appleIdRequest.nonce;
-    appleIdRequest.nonce = [RNAppleAuthUtils stringBySha256HashingString:rawNonce];
+    if (hashNonceAutomatically) {
+      rawNonce = appleIdRequest.nonce;
+      appleIdRequest.nonce = [RNAppleAuthUtils stringBySha256HashingString:rawNonce];
+    }
   }
 
   __block RNAppleAuthASAuthorizationDelegates *delegates = [
